@@ -1,0 +1,184 @@
+RUBY Basic Syntax and Notes
+#SOME NOTES
+Ruby Gem or Gem is package manager 
+No semicolons needed as you put each statement on a separate line.
+No curly brackets for functions for body 
+Concat by +
+Typecasting by .to_s, .to_i, .to_f, .to_datetime, .to_date, .to_time, .to_a  (string,int,float,array and many more)
+p,puts,and print is used to print  (PUTS prints and moves the cursor to a new line, print||printf without a linebreak, p is used to print in raw format so that )
+.inspect is string method to print in array format
+Hash is simply a dictonary like collection
+.keys gives keys in array and .values  gives the other
+Variables with starting letter in uppercase are CONSTANTS
+Instance variables starts with @ 
+in ruby theres a default method to_s for each class, that is called at the time of object initialization. And we can add more to it as it gets appended to the default method
+initialize method is not mandatory in a class definition, but it is commonly used as a constructor method
+initialize method allows us to customize objects. Because we can give parameters specific to the objects while using new method if initialize is there.
+In Ruby, classes are never closed: you can always add methods to an existing class. it is same for user defined as well as standard built-in classes
+While invoking super with no arguments, Ruby sends a message to the current object's parent, asking it to invoke a method of the same name as the current method, and passing it the parameters that were passed to the current method
+No built-in DoWhile loop, only single level inheritance possible 
+.class method prints class 
+.. is used to specify range in ruby
+range can be of a string as well like "a".."z"
+! known as BANG is used to mutate. for example a.rev reverses whatever is in a but the rev value is lost but of a.rev! is done the a gets updated or simply mutated
+<< appends in arrays, can be done by .append method as well
+.uniq removes duplicate values from array and keeps a single unique copy
+%w("String I want to add as arrays each elem sep by a space")  we can use this to quickly make array
+ {} can be used to write a block of code in a single line
+    like >>>
+    a.each do |food| 
+        print food
+    end
+
+    this can be replaced by a.each {|food| print food}
+.methods can be applied to diff objects and members to check whatever methods are available. For ex if varA is an integer type var we can do varA.methods 
+getter and setter, setter can be used to set input param from object instead of passing as a param from the obj, and setter can be used to get the values set by setter
+attr_accessor is alternative given by ruby for getter setter concept, the instance variables are created in global scope for the class and we can simply set value for the attribute of the class which is the instance variable like object.instance_var_name_as_if_it_is_the_method = "Value to set"
+
+
+
+
+
+
+
+IF 
+
+x = 10
+if x > 5
+  puts "x is greater than 5"
+end 
+
+
+IF_ELSEIF_ELSE
+
+if x > 10
+  puts "x is greater than 10"
+elsif x == 10
+  puts "x is equal to 10"
+else
+  puts "x is less than 10"
+end
+
+
+WHILE LOOP
+
+i = 0
+while i < 5
+  puts i
+  i += 1
+end
+
+FOR LOOP
+
+for i in 0..4  #The range of for loop is inclusive
+  puts i
+end
+
+
+
+
+#Iterators and Enumerables
+#in array
+array = [1, 2, 3, 4, 5]
+array.each do |num|
+  puts num
+end
+
+#in string
+new_str = "NEWSTRING"
+new_str.each_char do |thing|
+  puts thing
+end
+
+#in integer
+test = 60
+(1..test).each do |thing|
+  puts thing
+end
+
+
+# map
+numbers = [1,2,3,4,5,6,7]
+puts numbers.inspect
+
+doubled_num = numbers.map {|abb| abb*2}
+puts doubled_num.inspect
+
+#select 
+numbers = [1,2,3,4,5,6,7]
+even_numbers = numbers.select {|iterVal| iterVal.even?}
+puts "Even numbers : " + even_numbers.inspect
+
+
+#Function 
+def add_num (a,b=10)
+  return a+b
+end
+numToAdd = gets.to_i
+result = add_num(numToAdd)
+puts "Num added to #{numToAdd} is #{result}"
+
+#Data structure Hashes
+person = { "name" => "Alice", "age" => 30, "city" => "New York" }
+puts person["name"] 
+
+
+# class and Objects
+
+class Test
+  def initialize (inputName, inputAddress)
+    @name = inputName
+    @address = inputAddress
+  end
+
+  def greet
+    puts "Hello there, #{@name} from #{@address}"
+  end
+end
+
+firstperson = Test.new("Swikar","NEPAL")
+firstperson.greet
+secondPerson = Test.new("Acharya","Sankhamul")
+secondPerson.greet
+firstperson.greet
+
+
+#Inheritance and SUPER
+
+class Test
+  def initialize (inputName, inputAddress)
+    @name = inputName
+    @address = inputAddress
+  end
+
+  def greet
+     "Test: Hello there, #{@name} from #{@address}"
+  end
+
+  def methodOFtest
+    puts "This is a method of test class"
+  end
+  
+end
+
+firstperson = Test.new("Swikar","NEPAL")
+puts firstperson.greet
+secondPerson = Test.new("Acharya","Sankhamul")
+puts secondPerson.greet
+puts firstperson.greet
+
+
+class ForAge < Test
+  def initialize (inputName, inputAddress, inputAge)
+    super(inputName, inputAddress)
+    @age = inputAge
+  end
+
+  def greet 
+    super + " of age #{@age}. How has it been ?"
+  end
+end
+
+thirdPerson = ForAge.new("Sandar","MOMO",20)
+puts thirdPerson.greet
+thirdPerson.methodOFtest
