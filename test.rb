@@ -9,7 +9,7 @@ class Test
     end
   
     def methodOFtest
-      puts "This is a method of test class"
+      puts "This is a method of test class - secondary branch"
     end
     
   end
@@ -19,3 +19,6 @@ class Test
   secondPerson = Test.new("Acharya","Sankhamul")
   puts secondPerson.greet
   puts firstperson.greet
+  
+  firstperson.methodOFtest
+
